@@ -71,7 +71,7 @@
 
 <script>
 let usedNumbers = [];
-const skipNumbers = [1, 26]; // stałe pominięte liczby
+const skipNumbers = [1, 26];
 
 function losuj() {
   const min1 = parseInt(document.getElementById("min1").value);
@@ -79,16 +79,12 @@ function losuj() {
   const min2 = parseInt(document.getElementById("min2").value);
   const max2 = parseInt(document.getElementById("max2").value);
 
-  // Tworzymy tablicę możliwych liczb do losowania z pominiętymi
-  let possibleNumbers = [];
+
   for (let i = min1; i <= max1; i++) {
     if (!skipNumbers.includes(i)) possibleNumbers.push(i);
   }
 
-  // Resetujemy użyte liczby, jeśli wszystkie zostały wylosowane
   if (usedNumbers.length >= possibleNumbers.length) usedNumbers = [];
-
-  // Filtrujemy liczby już użyte
   const remainingNumbers = possibleNumbers.filter(n => !usedNumbers.includes(n));
 
   if (remainingNumbers.length === 0) {
@@ -96,11 +92,9 @@ function losuj() {
     return;
   }
 
-  // Losowanie liczby 1
   const number1 = remainingNumbers[Math.floor(Math.random() * remainingNumbers.length)];
   usedNumbers.push(number1);
 
-  // Losowanie liczby 2
   const number2 = Math.floor(Math.random() * (max2 - min2 + 1)) + min2;
 
   document.getElementById("result").innerHTML = `Numer z dziennika: ${number1} <br> Numer pytania: ${number2}`;
